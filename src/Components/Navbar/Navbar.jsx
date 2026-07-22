@@ -1,24 +1,49 @@
 import { Link, NavLink } from "react-router";
-import './NavBar.css'
+import "./NavBar.css";
 import { use } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
 
-// import { AuthContext } from "../../Contexts/AuthContext";
-// import { AuthContext } from "../../main";
-
 export default function Navbar() {
-
   // const userInfo = use(AuthContext)
   // console.log("This is a user email address", userInfo);
 
-  const { user } = use(AuthContext)
+  const { user, signOutUser } = use(AuthContext);
 
-    const Links =  <>
-        <li><NavLink to= "/">Home</NavLink></li>
-        <li><NavLink to= "/register">Register</NavLink></li>
-        <li><NavLink to= "/login">Login</NavLink></li>
+  // even handlers
+
+  const handleSignOut = () => {
+    signOutUser()
+      .then(() => {
+        console.log("sign out success full");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const Links = (
+    <>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/register">Register</NavLink>
+      </li>
+      <li>
+        <NavLink to="/login">Login</NavLink>
+      </li>
+      {user && (
+        <>
+          <li>
+            <NavLink to="/order">Order</NavLink>
+          </li>
+          <li>
+            <NavLink to="/profile">Profile</NavLink>
+          </li>
+        </>
+      )}
     </>
-
+  );
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -56,14 +81,19 @@ export default function Navbar() {
         <a className="btn btn-ghost text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
-         {
-            Links
-         }
-        </ul>
+        <ul className="menu menu-horizontal px-1">{Links}</ul>
       </div>
       <div className="navbar-end">
-        { user ?  <a className="btn">Sign Out</a> : <Link to = "/login">Login</Link>}
+        {user ? (
+          <>
+            <span className="pr-4 text-green-500 font-bold">{user.email}</span>
+            <a onClick={handleSignOut} className="btn">
+              Sign Out
+            </a>
+          </>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
       </div>
     </div>
   );
