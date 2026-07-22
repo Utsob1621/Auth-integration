@@ -1,13 +1,17 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import './NavBar.css'
 import { use } from "react";
 import { AuthContext } from "../../Contexts/AuthContext";
+
+// import { AuthContext } from "../../Contexts/AuthContext";
 // import { AuthContext } from "../../main";
 
 export default function Navbar() {
 
-  const userInfo = use(AuthContext)
-  console.log("This is a user email address", userInfo);
+  // const userInfo = use(AuthContext)
+  // console.log("This is a user email address", userInfo);
+
+  const { user } = use(AuthContext)
 
     const Links =  <>
         <li><NavLink to= "/">Home</NavLink></li>
@@ -59,7 +63,7 @@ export default function Navbar() {
         </ul>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        { user ?  <a className="btn">Sign Out</a> : <Link to = "/login">Login</Link>}
       </div>
     </div>
   );
