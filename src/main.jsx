@@ -11,6 +11,7 @@ import Login from './Components/Login/Login';
 import AuthProvider from './Contexts/AuthProvider';
 import Order from './Components/Order/Order';
 import Profile from './Components/Profile/Profile';
+import PrivateRoutes from './Components/PrivateRoutes/PrivateRoutes';
 
 
 //  export const AuthContext = createContext(null);
@@ -39,11 +40,15 @@ const router = createBrowserRouter([
       },
       {
         path : 'order',
-        Component : Order
+        element  : <PrivateRoutes>
+          <Order></Order>
+        </PrivateRoutes>
       },
       {
         path : 'profile',
-        Component : Profile
+        element : <PrivateRoutes>
+          <Profile></Profile>
+        </PrivateRoutes>
       }
     ]
   },
