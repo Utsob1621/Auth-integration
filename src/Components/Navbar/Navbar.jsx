@@ -32,6 +32,9 @@ export default function Navbar() {
       <li>
         <NavLink to="/login">Login</NavLink>
       </li>
+      <li>
+        <NavLink to="/dashboard">Dashboard</NavLink>
+      </li>
       {user && (
         <>
           <li>

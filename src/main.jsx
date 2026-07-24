@@ -12,6 +12,7 @@ import AuthProvider from './Contexts/AuthProvider';
 import Order from './Components/Order/Order';
 import Profile from './Components/Profile/Profile';
 import PrivateRoutes from './Components/PrivateRoutes/PrivateRoutes';
+import Dashboard from './Components/Dashboard/Dashboard';
 
 
 //  export const AuthContext = createContext(null);
@@ -48,6 +49,12 @@ const router = createBrowserRouter([
         path : 'profile',
         element : <PrivateRoutes>
           <Profile></Profile>
+        </PrivateRoutes>
+      },
+      {
+        path : 'dashboard',
+        element : <PrivateRoutes>
+          <Dashboard></Dashboard>
         </PrivateRoutes>
       }
     ]
